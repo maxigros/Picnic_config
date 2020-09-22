@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>653</width>
-    <height>350</height>
+    <width>618</width>
+    <height>379</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,38 +18,34 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>Buttons</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_7">
+        <item row="2" column="0">
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>26</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="0" column="0">
          <widget class="QGroupBox" name="groupBox_3">
           <property name="title">
-           <string>Buttons</string>
+           <string>Buttons settings</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
            <item row="0" column="0">
             <layout class="QGridLayout" name="gridLayout_2">
-             <item row="7" column="2">
-              <widget class="QPushButton" name="pushButton_buttons_apply">
-               <property name="text">
-                <string>Apply</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <widget class="QLineEdit" name="lineEdit_buttons_power"/>
-             </item>
-             <item row="0" column="0">
-              <widget class="QLabel" name="label_4">
-               <property name="text">
-                <string>POWER</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_2">
                <property name="text">
@@ -57,11 +53,14 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="2">
-              <widget class="QLineEdit" name="lineEdit_buttons_reset"/>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="comboBox_buttons_power_long"/>
              </item>
-             <item row="6" column="2">
-              <spacer name="verticalSpacer">
+             <item row="1" column="1">
+              <widget class="QComboBox" name="comboBox_buttons_power_short"/>
+             </item>
+             <item row="3" column="1">
+              <spacer name="verticalSpacer_5">
                <property name="orientation">
                 <enum>Qt::Vertical</enum>
                </property>
@@ -73,13 +72,13 @@
                </property>
               </spacer>
              </item>
-             <item row="2" column="1">
-              <widget class="QComboBox" name="comboBox_buttons_power_long"/>
+             <item row="5" column="1">
+              <widget class="QComboBox" name="comboBox_buttons_reset_short"/>
              </item>
-             <item row="4" column="0">
-              <widget class="QLabel" name="label_5">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_4">
                <property name="text">
-                <string>RESET</string>
+                <string>POWER</string>
                </property>
               </widget>
              </item>
@@ -97,55 +96,47 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QComboBox" name="comboBox_buttons_power_short"/>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="lineEdit_buttons_power"/>
              </item>
-             <item row="5" column="1">
-              <widget class="QComboBox" name="comboBox_buttons_reset_short"/>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>RESET</string>
+               </property>
+              </widget>
              </item>
-             <item row="3" column="1">
-              <spacer name="verticalSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Vertical</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>40</height>
-                </size>
-               </property>
-              </spacer>
+             <item row="5" column="2">
+              <widget class="QLineEdit" name="lineEdit_buttons_reset"/>
              </item>
             </layout>
            </item>
           </layout>
          </widget>
         </item>
-        <item row="0" column="1">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>216</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="1" column="0">
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>26</height>
-           </size>
-          </property>
-         </spacer>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_buttons_apply">
+            <property name="text">
+             <string>Apply</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </widget>
@@ -154,12 +145,25 @@
         <string>Clock</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
+        <item row="1" column="0">
+         <spacer name="verticalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>17</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="0" column="0">
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QGroupBox" name="groupBox">
             <property name="title">
-             <string>Watchdog</string>
+             <string>Watchdog settings</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_4">
              <item row="0" column="0">
@@ -175,7 +179,7 @@
           <item>
            <widget class="QGroupBox" name="groupBox_2">
             <property name="title">
-             <string>Clock</string>
+             <string>Clock settings</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_5">
              <item row="0" column="0">
@@ -220,32 +224,6 @@
           </item>
          </layout>
         </item>
-        <item row="0" column="1">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>270</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="1" column="0">
-         <spacer name="verticalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>17</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_3">
@@ -253,6 +231,19 @@
         <string>Alarm</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_8">
+        <item row="2" column="0">
+         <spacer name="verticalSpacer_10">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>0</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="0" column="0">
          <widget class="QGroupBox" name="groupBox_4">
           <property name="title">
@@ -269,149 +260,22 @@
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_alarm_type_1">
-               <item>
-                <property name="text">
-                 <string>Disabled</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Single</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every day</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every X hours</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every X minutes</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="comboBox_alarm_type_0"/>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_alarm_type_2">
-               <item>
-                <property name="text">
-                 <string>Disabled</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Single</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every day</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every X hours</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every X minutes</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="comboBox_alarm_type_1"/>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_alarm_type_3">
-               <item>
-                <property name="text">
-                 <string>Disabled</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Single</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every day</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every X hours</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every X minutes</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="comboBox_alarm_type_2"/>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_alarm_type_4">
-               <item>
-                <property name="text">
-                 <string>Disabled</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Single</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every day</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every X hours</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every X minutes</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="comboBox_alarm_type_3"/>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_alarm_type_5">
-               <item>
-                <property name="text">
-                 <string>Disabled</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Single</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every day</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every X hours</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Every X minutes</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="comboBox_alarm_type_4"/>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_alarm_type_5"/>
              </item>
             </layout>
            </item>
@@ -419,25 +283,249 @@
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <item>
               <widget class="QLabel" name="label_7">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>16777215</height>
+                </size>
+               </property>
                <property name="text">
-                <string>Parameter</string>
+                <string>X</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_alarm_parameter_1"/>
+              <widget class="QLineEdit" name="lineEdit_alarm_parameter_0">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_alarm_parameter_2"/>
+              <widget class="QLineEdit" name="lineEdit_alarm_parameter_1">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_alarm_parameter_3"/>
+              <widget class="QLineEdit" name="lineEdit_alarm_parameter_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_alarm_parameter_4"/>
+              <widget class="QLineEdit" name="lineEdit_alarm_parameter_3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="lineEdit_alarm_parameter_5"/>
+              <widget class="QLineEdit" name="lineEdit_alarm_parameter_4">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_alarm_parameter_5">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <item>
+              <widget class="QLabel" name="label_14">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>30</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>30</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Time</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTimeEdit" name="timeEdit_alarm_0">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>23</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTimeEdit" name="timeEdit_alarm_1">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>23</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTimeEdit" name="timeEdit_alarm_2">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>23</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTimeEdit" name="timeEdit_alarm_3">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>23</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTimeEdit" name="timeEdit_alarm_4">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>23</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QTimeEdit" name="timeEdit_alarm_5">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>23</height>
+                </size>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -451,99 +539,22 @@
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_alarm_action_1">
-               <item>
-                <property name="text">
-                 <string>Exec user script</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Turn on</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Turn off</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="comboBox_alarm_action_0"/>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_alarm_action_2">
-               <item>
-                <property name="text">
-                 <string>Exec user script</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Turn on</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Turn off</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="comboBox_alarm_action_1"/>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_alarm_action_3">
-               <item>
-                <property name="text">
-                 <string>Exec user script</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Turn on</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Turn off</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="comboBox_alarm_action_2"/>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_alarm_action_4">
-               <item>
-                <property name="text">
-                 <string>Exec user script</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Turn on</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Turn off</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="comboBox_alarm_action_3"/>
              </item>
              <item>
-              <widget class="QComboBox" name="comboBox_alarm_action_5">
-               <item>
-                <property name="text">
-                 <string>Exec user script</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Turn on</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Turn off</string>
-                </property>
-               </item>
-              </widget>
+              <widget class="QComboBox" name="comboBox_alarm_action_4"/>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_alarm_action_5"/>
              </item>
             </layout>
            </item>
@@ -555,6 +566,9 @@
                 <string>Script</string>
                </property>
               </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_alarm_script_0"/>
              </item>
              <item>
               <widget class="QLineEdit" name="lineEdit_alarm_script_1"/>
@@ -575,19 +589,6 @@
            </item>
           </layout>
          </widget>
-        </item>
-        <item row="0" column="1">
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>50</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item row="1" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -613,30 +614,353 @@
           </item>
          </layout>
         </item>
-        <item row="2" column="0">
-         <spacer name="verticalSpacer_10">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>0</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
         <string>IR</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout_9">
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_ir_apply">
+            <property name="text">
+             <string>Apply</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0">
+         <spacer name="verticalSpacer_6">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>151</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="title">
+           <string>IR control settings</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QLabel" name="label_11">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>IR Code</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_parameter_0">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_parameter_1">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_parameter_2">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_parameter_3">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_parameter_4">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_parameter_5">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <item>
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>Action</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_ir_action_0"/>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_ir_action_1"/>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_ir_action_2"/>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_ir_action_3"/>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_ir_action_4"/>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_ir_action_5"/>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <item>
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>Script</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_script_0"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_script_1"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_script_2"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_script_3"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_script_4"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_ir_script_5"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
       </widget>
       <widget class="QWidget" name="tab_5">
        <attribute name="title">
         <string>Power Management</string>
        </attribute>
+       <layout class="QGridLayout" name="gridLayout_10">
+        <item row="2" column="1">
+         <spacer name="verticalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>86</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0" colspan="2">
+         <widget class="QGroupBox" name="groupBox_6">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="title">
+           <string>Power management settings</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <item row="0" column="0">
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <widget class="QLabel" name="label_10">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Event</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_pm_type_0">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_pm_type_1">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_pm_type_2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="0" column="1">
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <item>
+              <widget class="QLabel" name="label_15">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Action</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_pm_action_0"/>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_pm_action_1"/>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboBox_pm_action_2"/>
+             </item>
+            </layout>
+           </item>
+           <item row="0" column="2">
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <item>
+              <widget class="QLabel" name="label_16">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="text">
+                <string>Script</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_pm_script_0"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_pm_script_1"/>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="lineEdit_pm_script_2"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_pm_apply">
+            <property name="text">
+             <string>Apply</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
@@ -647,7 +971,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>653</width>
+     <width>618</width>
      <height>20</height>
     </rect>
    </property>

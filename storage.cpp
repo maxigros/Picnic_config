@@ -2,100 +2,265 @@
 
 Storage::Storage()
 {
-    QString path = QCoreApplication::applicationDirPath();
-    path.append(QString::fromStdString(this->dataFileName));
+    /******************      DB file operations     ***************************/
 
-    /* Check existing data file */
-    if (!QFileInfo(path).exists()) {
-        /* Not found, need to create and init */
-        cout << "need new file\n\r";
-        this->createNewDataFile();
+    QString currentDir = QCoreApplication::applicationDirPath();
+    QString mainDbName = currentDir;
+    mainDbName.append("/");
+    mainDbName.append(this->dbFileName);
+    /* Check existing main DB */
+    if (!QFileInfo(mainDbName).exists()) {
+        /* Not found, use default copy */
+        QString defaultDbName = currentDir;
+        defaultDbName.append("/");
+        defaultDbName.append(this->dbFileNameDefault);
+        /* Check if default DB exists */
+        if (QFileInfo(defaultDbName).exists()) {
+            /* Copy default --> main */
+            if (!QFile::copy(defaultDbName, mainDbName)) {
+                /* Cannot copy file */
+                exit(ERROR_DB_FILE);
+            }
+        } else {
+            /* Don't have main nor default copy of DB, shit */
+            exit(ERROR_DB_FILE);
+        }
     }
-    cout << "file found\n\r";
-    /* Check valid sequence */
-    uint32_t t = this->readValidSequence();
-    if (t != this->validSequence) {
-        /* Valid sequence error, re-create file */
-        cout << "need re-create new file\n\r";
-        QFile::remove(path);
-        this->createNewDataFile();
-    }
-    /* One more check valid sequence */
-    t = this->readValidSequence();
-    if (t != this->validSequence) {
-        /* Undefined file error, exit */
-        exit(-1);
-    }
-    cout << "file OK\n\r";
-    /* File OK, read it and fill dataStruct */
-    this->readFullFile();
+    this->dbPath = mainDbName;
+
+    /*********************      DB routines     *******************************/
+
+    this->db = QSqlDatabase::addDatabase("QSQLITE");
+    this->db.setDatabaseName(this->dbPath);
+
 }
 
-void Storage::createNewDataFile()
+Storage::~Storage()
 {
-    cout << "new file\n\r";
-    // TODO: fill from STM, not manually
 
-    /* Fill dataStrucr with default values */
-    this->dataOptions.fields.validSequence = this->validSequence;
-
-    /* Write to empty file */
-    this->writeFullFile();
 }
 
-void Storage::readFullFile()
+QStringList Storage::getComboBoxVariants(uint8_t type)
 {
-    ifstream file_in(this->dataFileName.c_str(), std::ios::in | std::ios::binary);
-    if (!file_in) {
-        cout << "open in file failed\n\r";
-        return;
+    QStringList result;
+    QString queryText = "SELECT text FROM ";
+    switch (type) {
+        case BOXSUITTYPE_POW_S:
+            queryText.append("buttonsActionsPowerShort");
+            break;
+        case BOXSUITTYPE_POW_L:
+            queryText.append("buttonsActionsPowerLong");
+            break;
+        case BOXSUITTYPE_RES_S:
+            queryText.append("buttonsActionsResetShort");
+            break;
+        case BOXSUITTYPE_ALARM_EVENT:
+            queryText.append("alarmEvents");
+            break;
+        case BOXSUITTYPE_ALARM_ACTION:
+            queryText.append("alarmActions");
+            break;
+        case BOXSUITTYPE_IR_ACTION:
+            queryText.append("irActions");
+            break;
+        case BOXSUITTYPE_PM_EVENT:
+            queryText.append("pmEvents");
+            break;
+        case BOXSUITTYPE_PM_ACTION:
+            queryText.append("pmActions");
+            break;
+        default:
+            break;
     }
 
-    for (uint8_t i = 0; i < OPTIONS_UINT32_SIZE; ++i) {
-        file_in.read(reinterpret_cast<char*>(&(this->dataOptions.data[i])), sizeof(uint32_t));
-    }
+#ifdef DEBUG_DB_MSG
+    qDebug() << queryText;
+#endif
 
-    for (uint8_t i = 0; i < SCRIPTS_NUM; ++i) {
-        file_in.read(reinterpret_cast<char*>(&(this->dataScripts[i].size)), sizeof(uint8_t));
-        file_in.read(this->dataScripts[i].str, this->dataScripts[i].size);
+    if (!this->db.open()) {
+        exit(ERROR_DB_OPEN);
     }
-    file_in.close();
+    QSqlQuery query;
+    query.exec(queryText);
+    while(query.next()) {
+        result.append(query.value(0).toString());
+    }
+    this->db.close();
+
+    return result;
 }
 
-void Storage::writeFullFile()
+QStringList Storage::getComboBoxVariantData(uint8_t type, uint8_t id)
 {
-    ofstream file_out(this->dataFileName.c_str(), std::ios::out | std::ios::binary);
-    if (!file_out) {
-        cout << "open out file failed\n\r";
-        return;
+    QString arg1, arg2;
+    switch (type) {
+        case BOXSUITTYPE_ALARM_EVENT:
+            arg1 = "rowid, text, row_active, use_X";
+            arg2 = "alarmEvents";
+            break;
+        case BOXSUITTYPE_ALARM_ACTION:
+            arg1 = "rowid, text, script_active";
+            arg2 = "alarmActions";
+            break;
+        case BOXSUITTYPE_POW_S:
+            arg1 = "rowid, text, script_active";
+            arg2 = "buttonsActionsPowerShort";
+            break;
+        case BOXSUITTYPE_POW_L:
+            arg1 = "rowid, text";
+            arg2 = "buttonsActionsPowerLong";
+            break;
+        case BOXSUITTYPE_RES_S:
+            arg1 = "rowid, text, script_active";
+            arg2 = "buttonsActionsResetShort";
+            break;
+        case BOXSUITTYPE_IR_ACTION:
+            arg1 = "rowid, text, script_active";
+            arg2 = "irActions";
+            break;
+        case BOXSUITTYPE_PM_EVENT:
+            arg1 = "rowid, text, row_active";
+            arg2 = "pmEvents";
+            break;
+        case BOXSUITTYPE_PM_ACTION:
+            arg1 = "rowid, text, script_active";
+            arg2 = "pmActions";
+            break;
+        default:
+            break;
     }
 
-    for (uint8_t i = 0; i < OPTIONS_UINT32_SIZE; ++i) {
-        file_out.write(reinterpret_cast<char*>(&(this->dataOptions.data[i])), sizeof(uint32_t));
-    }
+    QString queryText = QString("SELECT %1 FROM %2 WHERE rowid=%3").arg(arg1).arg(arg2).arg(id + 1);
 
-    for (uint8_t i = 0; i < SCRIPTS_NUM; ++i) {
-        file_out.write(reinterpret_cast<char*>(&(this->dataScripts[i].size)), sizeof(uint8_t));
-        file_out.write(this->dataScripts[i].str, this->dataScripts[i].size);
-    }
+#ifdef DEBUG_DB_MSG
+    qDebug() << queryText;
+#endif
 
-    file_out.flush();
-    file_out.close();
+    if (!this->db.open()) {
+        exit(ERROR_DB_OPEN);
+    }
+    QSqlQuery query;
+    QStringList result;
+    query.exec(queryText);
+    while(query.next()) {
+        for (uint8_t i = 0; i < query.record().count(); ++i) {
+            result.append(query.value(i).toString());
+        }
+    }
+    this->db.close();
+    return result;
 }
 
-uint32_t Storage::readValidSequence()
+QStringList Storage::getTabData(uint8_t tabId, uint8_t row)
 {
-    ifstream file_in(this->dataFileName.c_str(), std::ios::in | std::ios::binary);
-    if (!file_in) {
-        cout << "open in file failed\n\r";
-        return 0;
+    QString arg1, arg2;
+    switch (tabId) {
+        case TABID_BUTTONS:
+            arg1 = "rowid, name, id_currentAction, script";
+            arg2 = "tabButtons";
+            break;
+        case TABID_CLOCK:
+            arg1 = "rowid, name, value";
+            arg2 = "tabClock";
+            break;
+        case TABID_ALARM:
+            arg1 = "rowid, id_currentEvent, parameter, id_currentAction, script, hours, minutes";
+            arg2 = "tabAlarm";
+            break;
+        case TABID_IR:
+            arg1 = "rowid, parameter, id_currentAction, script";
+            arg2 = "tabIr";
+            break;
+        case TABID_PM:
+            arg1 = "rowid, id_currentEvent, id_currentAction, script";
+            arg2 = "tabPm";
+            break;
+        default:
+            break;
     }
 
-    uint32_t temp = 0;
+    QString queryText = QString("SELECT %1 FROM %2 WHERE rowid=%3").arg(arg1).arg(arg2).arg(row + 1);
 
-    file_in.read(reinterpret_cast<char*>(&(temp)), sizeof(uint32_t));
-    file_in.close();
+#ifdef DEBUG_DB_MSG
+    qDebug() << queryText;
+#endif
 
-    return temp;
+    if (!this->db.open()) {
+        exit(ERROR_DB_OPEN);
+    }
+    QSqlQuery query;
+    QStringList result;
+    query.exec(queryText);
+    while(query.next()) {
+        for (uint8_t i = 0; i < query.record().count(); ++i) {
+            result.append(query.value(i).toString());
+        }
+    }
+    this->db.close();
+    return result;
 }
 
+void Storage::setTabData(uint8_t tabId, uint8_t row, QStringList data)
+{
+    QString arg1, arg2;
+    switch (tabId) {
+        case TABID_BUTTONS:
+            arg1 = "tabButtons";
+            switch (row) {
+                case 0:
+                case 2:
+                    arg2 = QString("id_currentAction = %1, script = '%2'")
+                            .arg(data[0].toInt())
+                            .arg(data[1]);
+                    break;
+                case 1:
+                    arg2 = QString("id_currentAction = %1")
+                            .arg(data[0].toInt());
+                    break;
+            }
+            break;
+        case TABID_CLOCK:
+            arg1 = "tabClock";
+            arg2 = QString("value = %1").arg(data[0].toInt());
+            break;
+        case TABID_ALARM:
+            arg1 = "tabAlarm";
+            arg2 = QString("id_currentEvent = %1, parameter = %2, id_currentAction = %3, script = '%4', hours = %5, minutes = %6")
+                    .arg(data[0].toInt())
+                    .arg(data[1].toInt())
+                    .arg(data[2].toInt())
+                    .arg(data[3])
+                    .arg(data[4].toInt())
+                    .arg(data[5].toInt());
+            break;
+        case TABID_IR:
+            arg1 = "tabIr";
+            arg2 = QString("parameter = %1, id_currentAction = %2, script = '%3'")
+                    .arg(data[0].toInt())
+                    .arg(data[1].toInt())
+                    .arg(data[2]);
+            break;
+        case TABID_PM:
+            arg1 = "tabPm";
+            arg2 = QString("id_currentEvent = %1, id_currentAction = %2, script = '%3'")
+                    .arg(data[0].toInt())
+                    .arg(data[1].toInt())
+                    .arg(data[2]);
+            break;
+        default:
+            break;
+    }
+
+    QString queryText = QString("UPDATE %1 SET %2 WHERE rowid = %3").arg(arg1).arg(arg2).arg(row + 1);
+
+#ifdef DEBUG_DB_MSG
+    qDebug() << queryText;
+#endif
+
+    if (!this->db.open()) {
+        exit(ERROR_DB_OPEN);
+    }
+    QSqlQuery query;
+    query.exec(queryText);
+    this->db.close();
+}
